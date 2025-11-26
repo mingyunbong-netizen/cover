@@ -1,0 +1,467 @@
+/* 기본 리셋: 모든 요소의 여백과 패딩을 초기화합니다. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* body: 웹페이지 전체에 적용되는 스타일 */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 상단 정렬로 변경 */
+    min-height: 100vh;
+    width: 100vw;
+    background-color: #f0f0f0;
+    overflow-x: hidden; /* 가로 스크롤바 강제 방지 */
+}
+
+/* page-container: 모든 요소의 기준이 되는 1440px 너비 컨테이너 */
+#page-container {
+    /* ⭐️ 변경: 뷰포트 너비에 맞게 유동적으로 크기 조정 ⭐️ */
+    width: 100vw; 
+    /* 1440x928 비율 유지를 위해 높이도 vw 기준으로 계산 */
+    height: calc(928 / 1440 * 100vw); 
+    min-height: 100vh; /* 작은 화면에서 최소 높이 확보 */
+
+    background-color: #FFFFFF;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    position: relative; /* 자식 요소의 위치 기준 */
+}
+
+/* ⭐️ 전체 요소 크기/위치/글꼴 크기 VW로 변환 ⭐️ */
+/* (원본 픽셀 값 / 1440 * 100vw) 공식 적용 */
+
+/* header-bar: 상단 바 스타일 */
+#header-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(70 / 1440 * 100vw); /* 70px -> vw */
+    background-color: #45DBDD;
+    position: relative;
+}
+
+/* logo-text: 'BookTag' 스타일 */
+#logo-text {
+    position: absolute;
+    left: calc(30 / 1440 * 100vw); /* 30px -> vw */
+    top: calc(20 / 70 * 100%); /* 부모 높이(70px) 기준 % 유지 */
+    color: #FFFFFF;
+    font-size: calc(24 / 1440 * 100vw); /* 24px -> vw */
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+}
+
+/* slogan-text 1: '나를 위한 전공 맞춤 도서!' 스타일 */
+#main-slogan-text {
+    position: absolute;
+    left: calc(309 / 1440 * 100vw);
+    top: calc(463 / 928 * 100%); /* 부모 높이 기준 % 유지 */
+    color: #7A7A7A;
+    font-size: calc(24 / 1440 * 100vw);
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+}
+
+/* slogan-text 2: '다양한 전공도서를 찾아보세요' 스타일 */
+#sub-slogan-text {
+    position: absolute;
+    left: calc(856 / 1440 * 100vw);
+    top: calc(463 / 928 * 100%); /* 부모 높이 기준 % 유지 */
+    color: #7A7A7A;
+    font-size: calc(24 / 1440 * 100vw);
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+}
+
+/* recommend-text: '내 분석 추천받기' 스타일 (왼쪽 타이틀) */
+#recommend-text {
+    position: absolute;
+    left: calc(308 / 1440 * 100vw);
+    top: calc(384 / 928 * 100%);
+    color: #7A7A7A;
+    font-size: calc(48 / 1440 * 100vw);
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    opacity: 0;
+    animation: fadeInText 0.5s ease-out forwards;
+    animation-delay: 2.0s;
+    z-index: 10;
+}
+
+/* new-slogan-text: '나를 위한 전공 맞춤 도서!' 스타일 (왼쪽 서브 텍스트) */
+#new-slogan-text {
+    position: absolute;
+    left: calc(342 / 1440 * 100vw);
+    top: calc(496 / 928 * 100%);
+    color: #7A7A7A;
+    font-size: calc(24 / 1440 * 100vw);
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+    opacity: 0;
+    animation: fadeInText 0.5s ease-out forwards;
+    animation-delay: 2.0s;
+    z-index: 20;
+}
+
+/* recommend-button: 왼쪽 버튼 */
+#recommend-button {
+    position: absolute;
+    left: calc(370 / 1440 * 100vw);
+    top: calc(629 / 928 * 100%);
+    width: calc(194 / 1440 * 100vw);
+    height: calc(45 / 1440 * 100vw);
+    background-color: #45DBDD;
+    border-radius: calc(8 / 1440 * 100vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: fadeInText 0.5s ease-out forwards;
+    animation-delay: 2.0s;
+    z-index: 30;
+    cursor: pointer;
+}
+
+/* button-text: 왼쪽 버튼 내부 텍스트 스타일 */
+#button-text {
+    color: #FFFFFF;
+    font-size: calc(18 / 1440 * 100vw);
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- ⭐️ 오른쪽 섹션 요소 스타일 ⭐️ --- */
+
+/* recommend-text2: '바로 탐색하기' 스타일 (오른쪽 타이틀) */
+#recommend-text2 {
+    position: absolute;
+    left: calc(846 / 1440 * 100vw);
+    top: calc(384 / 928 * 100%);
+    color: #7A7A7A;
+    font-size: calc(48 / 1440 * 100vw);
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    opacity: 0;
+    animation: fadeInText 0.5s ease-out forwards;
+    animation-delay: 2.0s;
+    z-index: 10;
+}
+
+/* new-slogan-text2: '다양한 전공도서를 찾아보세요' 스타일 (오른쪽 서브 텍스트) */
+#new-slogan-text2 {
+    position: absolute;
+    left: calc(830 / 1440 * 100vw);
+    top: calc(496 / 928 * 100%);
+    color: #7A7A7A;
+    font-size: calc(24 / 1440 * 100vw);
+    font-weight: normal;
+    font-family: 'Inter', sans-serif;
+    opacity: 0;
+    animation: fadeInText 0.5s ease-out forwards;
+    animation-delay: 2.0s;
+    z-index: 20;
+}
+
+/* recommend-butto2: 오른쪽 버튼 */
+#recommend-butto2 {
+    position: absolute;
+    left: calc(881 / 1440 * 100vw);
+    top: calc(629 / 928 * 100%);
+    width: calc(194 / 1440 * 100vw);
+    height: calc(45 / 1440 * 100vw);
+    background-color: #45DBDD;
+    border-radius: calc(8 / 1440 * 100vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: fadeInText 0.5s ease-out forwards;
+    animation-delay: 2.0s;
+    z-index: 30;
+    cursor: pointer;
+}
+
+/* button-text2: 오른쪽 버튼 내부 텍스트 스타일 */
+#button-text2 {
+    color: #FFFFFF;
+    font-size: calc(18 / 1440 * 100vw);
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ------------------------------------------- */
+/* ⭐️ 왼쪽/오른쪽 클릭 가능 영역 공통 스타일 ⭐️ */
+/* ------------------------------------------- */
+#left-clickable-area, #right-clickable-area {
+    position: absolute;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 5;
+
+    /* 부드러운 호버 효과를 위한 트랜지션 */
+    transition: background-color 0.3s ease;
+
+    /* 🚨 클릭 활성화 지연: 초기에는 클릭 방지 */
+    pointer-events: none;
+    animation: activateClick 0.01s forwards; /* 클릭 활성화 애니메이션 적용 */
+    animation-delay: 2.0s; /* 2.0초 후 클릭 활성화 */
+}
+
+#left-clickable-area:hover, #right-clickable-area:hover {
+    background-color: rgba(235, 235, 235, 0.5); /* 마우스 오버 시 색상 (투명도 추가) */
+}
+
+/* ------------------------------------------- */
+/* ⭐️ 왼쪽 클릭 가능 영역 (위치 및 크기) ⭐️ */
+/* ------------------------------------------- */
+#left-clickable-area {
+    left: calc(174 / 1440 * 100vw);
+    top: calc(218 / 928 * 100%);
+    width: calc(552 / 1440 * 100vw);
+    height: calc(555 / 928 * 100%);
+}
+
+/* ------------------------------------------- */
+/* ⭐️ 오른쪽 클릭 가능 영역 (위치 및 크기) ⭐️ */
+/* ------------------------------------------- */
+#right-clickable-area {
+    left: calc(726 / 1440 * 100vw);
+    top: calc(218 / 928 * 100%);
+    width: calc(540 / 1440 * 100vw);
+    height: calc(555 / 928 * 100%);
+}
+/* ------------------------------------------- */
+
+
+/* search-element: 좌우로 대칭 확장 애니메이션 적용되는 중심 요소 */
+#search-element {
+    position: absolute;
+    left: calc(653 / 1440 * 100vw);
+    top: calc(212 / 928 * 100%);
+    width: calc(140 / 1440 * 100vw);
+    height: calc(567 / 928 * 100%);
+    background-color: #FFFFFF;
+    border: calc(6 / 1440 * 100vw) solid #45DBDD; /* 6px -> vw */
+    box-shadow: 3px 5px calc(10.9 / 1440 * 100vw) rgba(0, 0, 0, 0.25);
+    border-radius: calc(8 / 1440 * 100vw);
+    animation: expandWidth 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+    z-index: 1; /* 가장 낮은 z-index */
+}
+
+/* Vertical Lines: 7개의 선의 기준 위치를 중앙에서 시작하도록 조정 */
+#vertical-line, #vertical-line-2, #vertical-line-3, #vertical-line-4,
+#vertical-line-5, #vertical-line-6, #vertical-line-7 {
+    position: absolute;
+    top: calc(212 / 928 * 100%);
+    width: calc(6 / 1440 * 100vw); /* 6px -> vw */
+    height: calc(567 / 928 * 100%);
+    background-color: #45DBDD;
+    z-index: 6; 
+    transition: transform 1.5s ease-out 0.5s; 
+}
+
+/* Line 4 (720, 고정 - 중앙선) */
+#vertical-line-4 {
+    left: calc(720 / 1440 * 100vw); 
+}
+
+/* Line 1 (720px 기준: 671px -> 184px 이동) */
+#vertical-line {
+    left: calc(720 / 1440 * 100vw); 
+    /* translateX는 왼쪽(left) 위치를 기준으로 이동하므로 픽셀 값을 vw로 변환 */
+    transform: translateX(calc(-49 / 1440 * 100vw)); 
+    animation: slideLine1X 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* Line 2 (720px 기준: 686px -> 200px 이동) */
+#vertical-line-2 {
+    left: calc(720 / 1440 * 100vw); 
+    transform: translateX(calc(-34 / 1440 * 100vw)); 
+    animation: slideLine2X 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* Line 3 (720px 기준: 703px -> 215px 이동) */
+#vertical-line-3 {
+    left: calc(720 / 1440 * 100vw); 
+    transform: translateX(calc(-17 / 1440 * 100vw)); 
+    animation: slideLine3X 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+
+/* Line 5 (720px 기준: 738px -> 1221px 이동) */
+#vertical-line-5 {
+    left: calc(720 / 1440 * 100vw); 
+    transform: translateX(calc(18 / 1440 * 100vw)); 
+    animation: slideLine5X 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* Line 6 (720px 기준: 753px -> 1237px 이동) */
+#vertical-line-6 {
+    left: calc(720 / 1440 * 100vw); 
+    transform: translateX(calc(33 / 1440 * 100vw)); 
+    animation: slideLine6X 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* Line 7 (720px 기준: 770px -> 1253px 이동) */
+#vertical-line-7 {
+    left: calc(720 / 1440 * 100vw); 
+    transform: translateX(calc(50 / 1440 * 100vw)); 
+    animation: slideLine7X 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* ------------------------------------------- */
+/* 🎬 Keyframes Definition (애니메이션 효과 정의) */
+/* 🚨 키프레임 내부의 픽셀 값도 모두 vw로 변환해야 함 */
+/* ------------------------------------------- */
+
+@keyframes expandWidth {
+    0% { 
+        left: calc(653 / 1440 * 100vw); 
+        width: calc(140 / 1440 * 100vw); 
+    }
+    100% { 
+        left: calc(168 / 1440 * 100vw); 
+        width: calc(1104 / 1440 * 100vw); 
+    }
+}
+
+/* 최종 위치는 720px 기준으로 -536px 이동 (184px - 720px = -536px) */
+@keyframes slideLine1X {
+    0% { transform: translateX(calc(-49 / 1440 * 100vw)); }
+    100% { transform: translateX(calc(-536 / 1440 * 100vw)); }
+}
+
+/* 최종 위치는 720px 기준으로 -520px 이동 (200px - 720px = -520px) */
+@keyframes slideLine2X {
+    0% { transform: translateX(calc(-34 / 1440 * 100vw)); }
+    100% { transform: translateX(calc(-520 / 1440 * 100vw)); }
+}
+
+/* 최종 위치는 720px 기준으로 -505px 이동 (215px - 720px = -505px) */
+@keyframes slideLine3X {
+    0% { transform: translateX(calc(-17 / 1440 * 100vw)); }
+    100% { transform: translateX(calc(-505 / 1440 * 100vw)); }
+}
+
+/* 최종 위치는 720px 기준으로 501px 이동 (1221px - 720px = 501px) */
+@keyframes slideLine5X {
+    0% { transform: translateX(calc(18 / 1440 * 100vw)); }
+    100% { transform: translateX(calc(501 / 1440 * 100vw)); }
+}
+
+/* 최종 위치는 720px 기준으로 517px 이동 (1237px - 720px = 517px) */
+@keyframes slideLine6X {
+    0% { transform: translateX(calc(33 / 1440 * 100vw)); }
+    100% { transform: translateX(calc(517 / 1440 * 100vw)); }
+}
+
+/* 최종 위치는 720px 기준으로 533px 이동 (1253px - 720px = 533px) */
+@keyframes slideLine7X {
+    0% { transform: translateX(calc(50 / 1440 * 100vw)); }
+    100% { transform: translateX(calc(533 / 1440 * 100vw)); }
+}
+
+@keyframes fadeInText {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* 🚨 클릭 활성화 Keyframe (2.0초 시점에 실행) */
+@keyframes activateClick {
+    100% {
+        pointer-events: auto;
+    }
+}
+
+/* ------------------------------------------- */
+/* ⭐️ 최대 너비 제한 미디어 쿼리 (1440px 이상일 때 확대 방지 및 중앙 정렬) ⭐️ */
+/* ------------------------------------------- */
+
+/* 화면 너비가 1440px을 초과할 경우의 스타일 */
+@media (min-width: 1440px) {
+    /* body는 flex 중앙 정렬 유지 */
+    body {
+        justify-content: center;
+        align-items: center; /* 다시 중앙 정렬로 변경 */
+    }
+
+    #page-container {
+        /* 1440px 이상에서는 모든 값을 픽셀로 고정하여 확대 방지 */
+        width: 1440px;
+        height: 928px;
+        margin: auto;
+    }
+
+    /* 모든 VW 값을 픽셀 값으로 되돌림 */
+    #header-bar { height: 70px; }
+    #logo-text { left: 30px; font-size: 24px; top: 20px; } /* top은 px로 고정해야 함 */
+    
+    #main-slogan-text { left: 309px; top: 463px; font-size: 24px; }
+    #sub-slogan-text { left: 856px; top: 463px; font-size: 24px; }
+    
+    #recommend-text { left: 308px; top: 384px; font-size: 48px; }
+    #new-slogan-text { left: 342px; top: 496px; font-size: 24px; }
+    #recommend-button { left: 370px; top: 629px; width: 194px; height: 45px; border-radius: 8px; }
+    #button-text { font-size: 18px; }
+
+    #recommend-text2 { left: 846px; top: 384px; font-size: 48px; }
+    #new-slogan-text2 { left: 830px; top: 496px; font-size: 24px; }
+    #recommend-butto2 { left: 881px; top: 629px; width: 194px; height: 45px; border-radius: 8px; }
+    #button-text2 { font-size: 18px; }
+
+    #left-clickable-area { left: 174px; top: 218px; width: 552px; height: 555px; }
+    #right-clickable-area { left: 726px; top: 218px; width: 540px; height: 555px; }
+
+    #search-element { 
+        left: 653px; 
+        top: 212px; 
+        width: 140px; 
+        height: 567px; 
+        border: 6px solid #45DBDD;
+        border-radius: 8px;
+    }
+    
+    #vertical-line, #vertical-line-2, #vertical-line-3, #vertical-line-4,
+    #vertical-line-5, #vertical-line-6, #vertical-line-7 {
+        top: 212px;
+        width: 6px;
+        height: 567px;
+    }
+    
+    #vertical-line-4 { left: 720px; }
+    
+    /* translateX는 픽셀 값으로 고정 */
+    #vertical-line { left: 720px; transform: translateX(-49px); }
+    #vertical-line-2 { left: 720px; transform: translateX(-34px); }
+    #vertical-line-3 { left: 720px; transform: translateX(-17px); }
+    #vertical-line-5 { left: 720px; transform: translateX(18px); }
+    #vertical-line-6 { left: 720px; transform: translateX(33px); }
+    #vertical-line-7 { left: 720px; transform: translateX(50px); }
+
+    /* 키프레임도 픽셀 값으로 고정 */
+    @keyframes expandWidth {
+        0% { left: 653px; width: 140px; }
+        100% { left: 168px; width: 1104px; }
+    }
+    @keyframes slideLine1X { 0% { transform: translateX(-49px); } 100% { transform: translateX(-536px); } }
+    @keyframes slideLine2X { 0% { transform: translateX(-34px); } 100% { transform: translateX(-520px); } }
+    @keyframes slideLine3X { 0% { transform: translateX(-17px); } 100% { transform: translateX(-505px); } }
+    @keyframes slideLine5X { 0% { transform: translateX(18px); } 100% { transform: translateX(501px); } }
+    @keyframes slideLine6X { 0% { transform: translateX(33px); } 100% { transform: translateX(517px); } }
+    @keyframes slideLine7X { 0% { transform: translateX(50px); } 100% { transform: translateX(533px); } }
+}
